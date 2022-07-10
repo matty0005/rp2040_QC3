@@ -11,14 +11,15 @@
 */
 void handshake_init();
 
+
+void reset_voltage();
+
 /**
  * Set the voltage of the QC output. 
  * 
  * Parameters:
- *  voltage: int - 0 = 5V, 1 = 9V, 2 = 12V.
+ *  voltage: int - voltage in mV.
 */
-void set_voltage_qc2(uint8_t voltage);
-
 void set_voltage(uint16_t voltage);
 
 #endif

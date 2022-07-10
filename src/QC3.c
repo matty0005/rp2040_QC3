@@ -42,48 +42,6 @@ void handshake_init() {
     continousMode = false;
 }
 
-/**
- * Set the voltage of the QC output. 
- * 
- * Parameters:
- *  voltage: int - 0 = 5V, 1 = 9V, 2 = 12V.
-*/
-void set_voltage_qc2(uint8_t voltage) {
-
-    // Make sure the handshake has occured to be in QC mode.
-    if (!handshakeComplete) {
-        handshake_init();
-    }
-
-    // Change based on voltage.
-    switch (voltage) {
-        
-        case QC_5V:
-
-            // Set to high impeadance to reset the voltage
-            gpio_set_dir(DATA_PLUS, GPIO_IN);
-            gpio_set_dir(DATA_MINUS, GPIO_IN);
-            break;
-
-        case QC_9V:
-
-            gpio_set_dir(DATA_PLUS, GPIO_OUT);
-            gpio_put(DATA_PLUS, 1);
-
-            gpio_set_dir(DATA_MINUS, GPIO_OUT);
-            gpio_put(DATA_MINUS, 1);
-            break;
-
-        case QC_12V:
-
-            // Disconnect (make high impeadance)
-            gpio_set_dir(DATA_PLUS, GPIO_IN);
-
-            gpio_set_dir(DATA_MINUS, GPIO_OUT);
-            gpio_put(DATA_MINUS, 1);
-            break;
-    }
-}
 
 uint16_t get_voltage_mv() {
 
@@ -102,6 +60,7 @@ void set_continous_mode() {
 
     gpio_set_dir(DATA_MINUS, GPIO_OUT);
     gpio_put(DATA_MINUS, 1);
+    sleep_ms(60);
 
     continousMode = true;
 }
@@ -194,7 +153,21 @@ void set_voltage(uint16_t voltage) {
             decrement_voltage();
         }
     }
+}
+
+void reset_voltage() {
+
+    // Make sure the handshake has occured to be in QC mode.
+    if (!handshakeComplete) {
+        handshake_init();
+    }  
+    
+    gpio_set_dir(DATA_PLUS, GPIO_IN);
+    gpio_set_dir(DATA_MINUS, GPIO_OUT);
+    gpio_put(DATA_MINUS, 0);
 
 
+    currentVoltage = 5000;
 
+    continousMode = false;
 }
