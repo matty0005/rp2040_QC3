@@ -2,7 +2,7 @@
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 
-#include "QC2.h"
+#include "QC3.h"
 
 int main() {
 

@@ -1,5 +1,5 @@
-#ifndef QC2_H
-#define QC2_h
+#ifndef QC3_H
+#define QC3_h
 
 // Macros for the 3 voltage steps
 #define QC_5V 0 
