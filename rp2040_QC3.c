@@ -7,5 +7,5 @@
 int main() {
 
     // Set the voltage of the output
-    set_voltage(QC_9V);
+    set_voltage(7400);
 }
