@@ -6,7 +6,7 @@ Only supporting class A.
 
 ## Circuit
 
-![Circuit](QC3_circuit.png)
+![Circuit](QC3-circuit.png)
 
 #### Connections
 
