@@ -30,12 +30,13 @@ void handshake_init() {
 
     // Set high impeadance to reach 0.325v-2v crietia
     gpio_set_dir(DATA_PLUS, GPIO_IN);
+    gpio_set_dir(DATA_PLUS, GPIO_IN);
     sleep_ms(1500);
 
     // Discharge D1
     gpio_set_dir(DATA_MINUS, GPIO_OUT);
     gpio_put(DATA_MINUS, 0);
-    sleep_ms(2);
+    sleep_ms(5);
 
     handshakeComplete = true;
     continousMode = false;
@@ -101,6 +102,8 @@ void set_continous_mode() {
 
     gpio_set_dir(DATA_MINUS, GPIO_OUT);
     gpio_put(DATA_MINUS, 1);
+
+    continousMode = true;
 }
 
 void increment_voltage() {
@@ -119,10 +122,10 @@ void increment_voltage() {
 
     gpio_set_dir(DATA_PLUS, GPIO_OUT);
     gpio_put(DATA_PLUS, 1);
-    sleep_ms(1);   
+    sleep_ms(2);   
 
     gpio_set_dir(DATA_PLUS, GPIO_IN);
-    sleep_ms(1);
+    sleep_ms(2);
 
     currentVoltage += 200;
 }
@@ -141,12 +144,12 @@ void decrement_voltage() {
 
     set_continous_mode();
 
-    gpio_set_dir(DATA_PLUS, GPIO_IN);
-    sleep_ms(1);
+    gpio_set_dir(DATA_MINUS, GPIO_IN);
+    sleep_ms(2);
 
-    gpio_set_dir(DATA_PLUS, GPIO_OUT);
+    gpio_set_dir(DATA_MINUS, GPIO_OUT);
     gpio_put(DATA_PLUS, 1);
-    sleep_ms(1);   
+    sleep_ms(2);   
     
 
     currentVoltage -= 200;

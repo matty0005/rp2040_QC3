@@ -7,5 +7,5 @@
 int main() {
 
     // Set the voltage of the output
-    set_voltage(7400);
+    set_voltage(7200);
 }
